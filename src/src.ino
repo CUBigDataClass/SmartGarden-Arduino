@@ -1,9 +1,12 @@
 #include "DHT.h"
 
-#define DHTPIN 2 
+#define DHTPIN 2
 #define DHTTYPE DHT22
 
 DHT dht(DHTPIN, DHTTYPE);
+
+#define LIGHTPIN A0
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -24,5 +27,12 @@ void loop() {
     Serial.print("temperature:");
     Serial.println(t);
   }
-  delay(5000);
+
+  delay(1000);
+
+  int light_intensity = analogRead(LIGHTPIN);
+  Serial.print("light:");
+  Serial.println(light_intensity);
+
+  delay(4000);
 }
