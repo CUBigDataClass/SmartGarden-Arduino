@@ -11,6 +11,12 @@ DHT dht(DHTPIN, DHTTYPE);
 
 #define FLOAT_SENSOR_PIN 3
 
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#define TEMP_PROBE_PIN 4
+OneWire oneWire(TEMP_PROBE_PIN);
+DallasTemperature sensors(&oneWire);
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -50,6 +56,15 @@ void loop() {
   int float_switch = digitalRead(FLOAT_SENSOR_PIN);
   Serial.print("float sensor:");
   Serial.println(float_switch);
+  // DS18B20 temperature probe
+  sensors.requestTemperatures();
+  int celcius=sensors.getTempCByIndex(0);
+  if(celcius < -100){ // If not connected, probe reads -127 C
+    Serial.println("Error reading DS18B20 temperature probe");
+  }else{
+    Serial.print("temp probe:");
+    Serial.println(celcius);
+  }
   // Polling Delay
   delay(2000);
 }
