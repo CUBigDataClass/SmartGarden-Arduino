@@ -5,7 +5,11 @@
 
 DHT dht(DHTPIN, DHTTYPE);
 
+#define ENABLELIGHTSENSOR false
 #define LIGHTPIN A0
+
+#define ENABLEECSENSOR false
+#define ECSENSORPIN A1
 
 
 void setup() {
@@ -27,12 +31,24 @@ void loop() {
     Serial.print("temperature:");
     Serial.println(t);
   }
-
   delay(1000);
 
-  int light_intensity = analogRead(LIGHTPIN);
-  Serial.print("light:");
-  Serial.println(light_intensity);
+  if(ENABLELIGHTSENSOR){
+    int light_intensity = analogRead(LIGHTPIN);
+    Serial.print("light:");
+    Serial.println(light_intensity);
+    delay(1000);
+  }
 
-  delay(4000);
+
+
+  if(ENABLELIGHTSENSOR){
+    int dissolved_solids = analogRead(ECSENSORPIN);
+    Serial.print("dissolved_solids:");
+    Serial.println(dissolved_solids);
+    delay(1000);
+  }
+
+
+  delay(2000);
 }
