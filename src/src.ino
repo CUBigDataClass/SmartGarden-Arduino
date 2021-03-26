@@ -9,12 +9,14 @@ DHT dht(DHTPIN, DHTTYPE);
 #define ENABLE_EC_SENSOR false
 #define EC_SENSOR_PIN A1
 
+#define FLOAT_SENSOR_PIN 3
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   Serial.println(F("Getting things set up..."));
   dht.begin();
+  pinMode(FLOAT_SENSOR_PIN, INPUT_PULLUP);
 }
 
 void loop() {
@@ -44,6 +46,10 @@ void loop() {
     Serial.println(dissolved_solids);
     delay(1000);
   }
+
+  int float_switch = digitalRead(FLOAT_SENSOR_PIN);
+  Serial.print("float sensor:");
+  Serial.println(float_switch);
   // Polling Delay
   delay(2000);
 }
