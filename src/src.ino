@@ -75,5 +75,5 @@ void loop() {
     Serial.println(water_temperature);
   }
   // Polling Delay
-  delay(2000);
+  delay(3000);
 }
