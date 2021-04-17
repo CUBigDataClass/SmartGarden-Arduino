@@ -41,29 +41,29 @@ void loop() {
   if (isnan(humidity) || isnan(air_temperature)) {
     Serial.println(F("Error reading from DHT sensor"));
   }else{
-    Serial.print("humidity:");
+    Serial.print("humidity,DHT22,air:");
     Serial.println(humidity);
-    Serial.print("temperature:");
+    Serial.print("temperature,DHT22,air:");
     Serial.println(air_temperature);
   }
   delay(1000);
   // Light Sensor (photo-resistor)
   if(ENABLE_LIGHT_SENSOR){
     light_intensity = analogRead(LIGHT_PIN);
-    Serial.print("light:");
+    Serial.print("light,photoresistor,analog resistor:");
     Serial.println(light_intensity);
     delay(1000);
   }
   // EC Sensor (measures dissolved solids)
   if(ENABLE_EC_SENSOR){
     dissolved_solids = analogRead(EC_SENSOR_PIN);
-    Serial.print("dissolved solids:");
+    Serial.print("ec,robot ocean,dissolved solids:");
     Serial.println(dissolved_solids);
     delay(1000);
   }
   // Float Switch
   float_switch = digitalRead(FLOAT_SENSOR_PIN);
-  Serial.print("float sensor:");
+  Serial.print("switch,float switch,water level:");
   Serial.println(float_switch);
   // DS18B20 temperature probe
   sensors.requestTemperatures();
@@ -71,7 +71,7 @@ void loop() {
   if(water_temperature < -100){ // If not connected, probe reads -127 C
     Serial.println("Error reading from DS18B20 temperature probe");
   }else{
-    Serial.print("water temperature:");
+    Serial.print("temperature,DS18B20,water:");
     Serial.println(water_temperature);
   }
   // Polling Delay
